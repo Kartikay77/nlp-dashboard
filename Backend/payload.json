@@ -1,0 +1,10 @@
+{
+  "keywords": ["timeline", "eta", "risk", "blocked", "dependency", "urgent"],
+  "date_from": null,
+  "date_to": null,
+  "sources": ["gmail", "outlook", "teams", "jira", "ppt"],
+  "include_numbers": true,
+  "include_symbols": true,
+  "include_ticket_ids": true,
+  "fuzzy_threshold": 80
+}
