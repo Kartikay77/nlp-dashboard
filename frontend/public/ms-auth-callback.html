@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Microsoft Auth Callback</title>
+  </head>
+  <body>
+      <script>
+    try {
+      const hash = window.location.hash.substring(1);
+      const params = new URLSearchParams(hash);
+      const accessToken = params.get("access_token");
+      const error = params.get("error_description") || params.get("error");
+
+      if (accessToken) {
+        window.opener.postMessage(
+          { type: "MS_AUTH_SUCCESS", access_token: accessToken },
+          window.location.origin
+        );
+      } else {
+        window.opener.postMessage(
+          { type: "MS_AUTH_ERROR", error: error || "No access token returned" },
+          window.location.origin
+        );
+      }
+
+      window.close();
+    } catch (e) {
+      window.opener.postMessage(
+        { type: "MS_AUTH_ERROR", error: e.message || "Callback parsing failed" },
+        window.location.origin
+      );
+      window.close(); 
+    }
+  </script>
+    <p>You can close this window.</p>
+  </body>
+</html>
